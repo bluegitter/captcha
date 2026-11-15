@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.tellhow.tools</groupId>
+  <artifactId>captcha-dataset-generator</artifactId>
+  <version>1.0.0</version>
+  <properties>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    <!-- Use the locally built application component without resolving its
+         internal corporate BOM/repository. -->
+    <dependency>
+      <groupId>com.tellhow</groupId>
+      <artifactId>cloud-common-captcha</artifactId>
+      <version>3.0.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>${user.home}/.m2/repository/com/tellhow/cloud-common-captcha/3.0.0-SNAPSHOT/cloud-common-captcha-3.0.0-SNAPSHOT.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.kaptcha</groupId>
+      <artifactId>kaptcha</artifactId>
+      <version>2.3.2</version>
+      <scope>system</scope>
+      <systemPath>${user.home}/.m2/repository/com/google/code/kaptcha/kaptcha/2.3.2/kaptcha-2.3.2.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-core</artifactId>
+      <version>5.8.26</version>
+      <scope>system</scope>
+      <systemPath>${user.home}/.m2/repository/cn/hutool/hutool-core/5.8.26/hutool-core-5.8.26.jar</systemPath>
+    </dependency>
+  </dependencies>
+</project>

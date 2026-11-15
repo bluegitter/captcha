@@ -1,0 +1,20 @@
+# Python and local environments
+.venv*/
+__pycache__/
+*.py[cod]
+
+# Generated datasets and model artifacts
+data/
+artifacts/
+web/models/
+
+# Java/Maven
+target/
+
+# Local OS/editor files
+.DS_Store
+.metals/
+.vscode/
+
+# Original cloud source tree (kept locally, outside this standalone project)
+cloud/
