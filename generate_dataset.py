@@ -12,7 +12,7 @@ def font(size):
         if Path(p).exists(): return ImageFont.truetype(p,size)
     return ImageFont.load_default()
 def render(text,rng,w=WIDTH,h=HEIGHT):
-    # cloud-common-captcha defaults: white background, black 30px text,
+    # production Kaptcha defaults: white background, black 30px text,
     # five-pixel character spacing, no border, and DefaultNoise in black.
     im=Image.new('L',(w,h),255); d=ImageDraw.Draw(im); x=5
     for ch in text:

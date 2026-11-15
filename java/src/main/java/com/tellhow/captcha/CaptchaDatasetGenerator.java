@@ -1,17 +1,37 @@
 package com.tellhow.captcha;
 
 import com.google.code.kaptcha.Producer;
-import com.tellhow.cloud.common.captcha.config.KaptchaConfiguration;
-import com.tellhow.cloud.common.captcha.config.KaptchaProperties;
+import com.google.code.kaptcha.impl.DefaultKaptcha;
+import com.google.code.kaptcha.util.Config;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.concurrent.ThreadLocalRandom;
+import java.io.InputStream;
+import java.util.Properties;
 
-/** Generates labelled images with the same Producer used by CodeEndpoint. */
+/** Generates labelled images with the production Kaptcha settings copied locally. */
 public final class CaptchaDatasetGenerator {
     private CaptchaDatasetGenerator() { }
+
+    /**
+     * Keep these values aligned with ClientCacheConfig/KaptchaProperties in the
+     * production service. The generator deliberately has no cloud-common-captcha
+     * dependency so it can be built as a standalone project.
+     */
+    private static Producer createProducer() throws Exception {
+        Properties settings = new Properties();
+        try (InputStream input = CaptchaDatasetGenerator.class.getClassLoader()
+                .getResourceAsStream("captcha.properties")) {
+            if (input == null) {
+                throw new IllegalStateException("captcha.properties is missing from the classpath");
+            }
+            settings.load(input);
+        }
+        DefaultKaptcha producer = new DefaultKaptcha();
+        producer.setConfig(new Config(settings));
+        return producer;
+    }
 
     public static void main(String[] args) throws Exception {
         if (args.length < 1 || args.length > 2) {
@@ -23,8 +43,7 @@ public final class CaptchaDatasetGenerator {
             throw new IllegalStateException("cannot create output directory: " + output);
         }
 
-        KaptchaProperties properties = new KaptchaProperties();
-        Producer producer = new KaptchaConfiguration().producer(properties);
+        Producer producer = createProducer();
         for (int i = 0; i < count; i++) {
             String text = producer.createText();
             BufferedImage image = producer.createImage(text);

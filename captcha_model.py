@@ -15,7 +15,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from torch import nn
 from torch.utils.data import DataLoader, Dataset, random_split
 
-# cloud-common-captcha/Kaptcha's default character pool. Keeping the model
+# production Kaptcha character pool. Keeping the model
 # vocabulary identical to the generator avoids wasting classes on characters
 # that can never occur in production.
 CHARS = "2345678abcdefgmnpwxy"

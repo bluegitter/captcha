@@ -1,6 +1,6 @@
 # CAPTCHA recognition experiment
 
-`CodeEndpoint` uses Google Kaptcha `Producer.createText()` and `createImage(text)`, then stores the text in Redis. The Java generator under `java/` calls the same `cloud-common-captcha` component and writes the generated text into each image filename.
+`CodeEndpoint` uses Google Kaptcha `Producer.createText()` and `createImage(text)`, then stores the text in Redis. The Java generator under `java/` uses the same Kaptcha settings copied into this project and writes the generated text into each image filename.
 
 ```bash
 # Generate with the same Java Kaptcha configuration as CodeEndpoint.
